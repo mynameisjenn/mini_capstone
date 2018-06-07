@@ -5,11 +5,9 @@ json.user do
   json.email @order.user.email
 end
 
-json.product do
-  json.partial! @order.product, partial: 'api/products/product', as: :product
+json.carted_products do
+  json.array! @order.carted_products, partial: 'api/carted_products/carted_product', as: :carted_product
 end
-
-json.quantity @order.quantity
 
 json.formatted do
   json.subtotal number_to_currency(@order.subtotal)

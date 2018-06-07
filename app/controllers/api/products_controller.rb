@@ -1,7 +1,8 @@
 class Api::ProductsController < ApplicationController
+  before_action :authenticate_admin, only: [:create, :update, :destroy]
+
   def index
     @products = Product.all 
-  
     search_term = params[:search]
 
     if search_term
@@ -24,8 +25,6 @@ class Api::ProductsController < ApplicationController
         category = Category.find_by(name: category_name)
         @products = category.products
       end
-
-
       render 'index.json.jbuilder'
   end
 
@@ -38,8 +37,12 @@ class Api::ProductsController < ApplicationController
                           description: params[:description],
                           supplier_id: params[:supplier_id]
                           )
-    @product.save
-    render 'show.json.jbuilder'
+
+    if @product.save
+      render 'show.json.jbuilder'
+    else
+      render json: {errors: @products.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
 
@@ -53,6 +56,7 @@ class Api::ProductsController < ApplicationController
 
 
   def update
+
     product_id = params[:id]
     @product = Product.find(product_id)
 
@@ -61,14 +65,17 @@ class Api::ProductsController < ApplicationController
     @product.description = params[:description] || @product.description
     @product.supplier_id = params[:supplier_id] || @product.supplier_id
 
-    @product.save
-    render 'show.json.jbuilder'
+    if @product.save
+      render 'show.json.jbuilder'
+    else
+    render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy
     product_id = params[:id]
     @product = Product.find(product_id)
     @product.destroy
-    render json: {message: "Product successfully destroyed."}
+    render json: {message: "Product successfully destroyed."} 
   end
 end
