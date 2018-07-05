@@ -7,9 +7,8 @@ json.images do
   json.array! product.images, partial: "api/images/image", as: :image
 end
 
+json.description product.description
 json.discounted product.is_discounted?
-json.tax product.tax
-json.total product.total
 
 json.formatted do
   json.price number_to_currency(product.price)

@@ -20,7 +20,7 @@ class Api::ProductsController < ApplicationController
       @products = @products.order(:id => :asc)
     end
 
-    category_name = params[:category_name]
+    category_name = params[:category]
       if category_name
         category = Category.find_by(name: category_name)
         @products = category.products
@@ -28,7 +28,11 @@ class Api::ProductsController < ApplicationController
       render 'index.json.jbuilder'
   end
 
-
+  def show
+    product_id = params[:id]
+    @product = Product.find(product_id)
+    render 'show.json.jbuilder'
+  end
 
   def create
     @product = Product.new(
@@ -46,15 +50,6 @@ class Api::ProductsController < ApplicationController
   end
 
 
-  
-  def show
-    puts "headers: #{request.headers["Authorization"]}"
-    product_id = params[:id]
-    @product = Product.find(product_id)
-    render 'show.json.jbuilder'
-  end
-
-
   def update
 
     product_id = params[:id]
@@ -68,7 +63,7 @@ class Api::ProductsController < ApplicationController
     if @product.save
       render 'show.json.jbuilder'
     else
-    render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

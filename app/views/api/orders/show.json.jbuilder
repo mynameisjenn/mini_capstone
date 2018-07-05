@@ -9,6 +9,10 @@ json.carted_products do
   json.array! @order.carted_products, partial: 'api/carted_products/carted_product', as: :carted_product
 end
 
+json.subtotal @order.subtotal
+json.tax @order.tax
+json.total @order.total
+
 json.formatted do
   json.subtotal number_to_currency(@order.subtotal)
   json.tax number_to_currency(@order.tax)
