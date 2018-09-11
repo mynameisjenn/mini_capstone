@@ -4,7 +4,7 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Welcome to Vue.js!"
+      message: "Welcome to ALL THE GAMES!"
     };
   },
   created: function() {},
@@ -26,7 +26,7 @@ var ProductsShowPage = {
                             url: "",
                             alt: "" 
                             }
-                            ]
+                            ],
                   formatted: {
                             price: "",
                             tax: "",
@@ -40,12 +40,11 @@ var ProductsShowPage = {
                             product_names: [ ]
                           }
                   }
-      }
     };
   }, 
   created: function() {
     axios
-    .get("api/products" + this.$route.params.id)
+    .get("api/products/" + this.$route.params.id)
     .then(function(response) {
       this.product = response.data;
     }.bind(this));
@@ -113,8 +112,7 @@ var NewProductPage = {
       name: "",
       price: "",
       description: "",
-      imageURL: "",
-      supplier: { },
+      supplier_id: "",
       errors: []
     };
   },
@@ -124,8 +122,7 @@ var NewProductPage = {
         name: this.name,
         price: this.price,
         description: this.description,
-        image: this.imageURL,
-        supplier: this.id
+        supplier_id: this.supplier_id
       };
       axios
         .post("/products", params)
@@ -192,12 +189,11 @@ var LogoutPage = {
 var router = new VueRouter({
   routes: [
           { path: "/", component: HomePage },
-          { path: "/sample", component: SamplePage },
           { path: "/signup", component: SignupPage },
           { path: "/login", component: LoginPage },
           { path: "/logout", component: LogoutPage },
           { path: "/products", component: ProductsIndexPage },
-          { path: "products/new", component: NewProductPage },
+          { path: "/products/new", component: NewProductPage },
           { path: "/products/:id", component: ProductsShowPage }
           ],
   scrollBehavior: function(to, from, savedPosition) {

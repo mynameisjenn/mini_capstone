@@ -17,14 +17,15 @@
     <a href="/#/signup">Signup</a>
     <a href="/#/login">Login</a>
     <a href="/#/logout">Logout</a>
-    <a href="/#/new">New Product</a>
+    <a href="/#/products/new">New Product</a>
+    <a href="/#/products">Products</a>
     
 
     <router-view></router-view>
 
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
@@ -41,12 +42,11 @@
 
 
 <template id="sample-page">
-  <div class="vue-component">
-    <div class="container">
-
-    <h1>{{ message }}</h1>
-    <a href="/#/">Go to Homepage</a>
-  </div>
+    <div class="vue-component">
+      <div class="container">
+        <h1>{{ message }}</h1>
+      <a href="/#/">Go to Homepage</a>
+    </div>
   </div>
 </template>
 
@@ -123,12 +123,12 @@
         <label>Description:</label>
         <input type="text" class="form-control" v-model="description">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Image:</label>
         <input type="text" class="form-control" v-model="imageURL">
-      </div>
+      </div> -->
       <div class="form-group">
-        <label>Supplier:</label>
+        <label>Supplier ID:</label>
         <input type="text" class="form-control" v-model="id">
       </div>
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
@@ -137,28 +137,21 @@
   </div>
 </template>
 
-
-
 <template id="products-index-page">
    <div class="vue-component">
     <div class="container">
-      <div class="row">
-
-
-<div v-for="product in products" class="col-md-4">
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" v-bind:src="product['image_url']" alt="">
-      <div class="card-body">
-        <h5 class="card-title">{{ product["name"] }} </h5>
-        <p class="card-text">{{ product["description"] }} </p>
-
-        <a v-bind:href=" '/client/products/' + product['id']" class="btn btn-primary">More Info</a>
-      </div>
-    </div>
-    </div>
-  </div>    
-
-
+      <div class="row">     
+        <div v-for="product in products" class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" v-bind:src="product['image_url']" alt="">
+              <div class="card-body">
+                <h5 class="card-title">{{ product["name"] }} </h5>
+                <p class="card-text">{{ product["description"] }} </p>
+                <a v-bind:href=" 'api/products/' + product['id']" class="btn btn-primary">More Info</a>
+              </div>
+            </div>
+          </div>
+        </div>    
       
     </div> 
    </div> 
@@ -168,9 +161,9 @@
 <template id="products-show-page">
    <div class="vue-component">
      <div class="container">
-       
-
-
+      <div >
+        
+      </div>
      </div>
    </div> 
 </template>
