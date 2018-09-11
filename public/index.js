@@ -4,7 +4,7 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Welcome to ALL THE GAMES!"
+      message: "Welcome to Game City!"
     };
   },
   created: function() {},
@@ -173,14 +173,15 @@ var LoginPage = {
 };
 
 var LogoutPage = {
-  template: "<h1>Logout</h1>",
+  template: "#logout-page",
+  data: function() {
+    return {
+      message: "You have successfully logged out!"
+    };
+  },
   created: function() {
     axios.defaults.headers.common["Authorization"] = undefined;
-    console.log(localStorage.getItem("jwt"));
     localStorage.removeItem("jwt");
-    console.log(localStorage.getItem("jwt"));
-    console.log("It works.");
-    router.push("/");
   }
 };
 
