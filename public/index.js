@@ -92,7 +92,7 @@ var SignupPage = {
         password_confirmation: this.passwordConfirmation
       };
       axios
-        .post("/users", params)
+        .post("api/users", params)
         .then(function(response) {
           router.push("/login");
         })
@@ -125,7 +125,7 @@ var NewProductPage = {
         supplier_id: this.supplier_id
       };
       axios
-        .post("/products", params)
+        .post("api/products", params)
         .then(function(response) {
           router.push("/#/");
         })
@@ -176,7 +176,7 @@ var LogoutPage = {
   template: "#logout-page",
   data: function() {
     return {
-      message: "You have successfully logged out!"
+      message: "Thanks for checking us out!"
     };
   },
   created: function() {

@@ -12,14 +12,14 @@
 </head>
 <body>
   <div id="vue-app">
-
-    <a href="/#/">Home</a>
-    <a href="/#/signup">Signup</a>
-    <a href="/#/login">Login</a>
-    <a href="/#/logout">Logout</a>
-    <a href="/#/products/new">New Product</a>
-    <a href="/#/products">Products</a>
-    
+    <div class="container">
+      <a href="/#/">Home</a> | 
+      <a href="/#/signup">Signup</a> | 
+      <a href="/#/login">Login</a> | 
+      <a href="/#/logout">Logout</a> | 
+      <a href="/#/products/new">New Product</a> | 
+      <a href="/#/products">Products</a>
+    </div>
 
     <router-view></router-view>
 
@@ -33,11 +33,11 @@
 
 <template id="home-page">
   <div class="vue-component">
-
+    <div class="container">
     <h1>{{ message }}</h1>
     <a href="/#/signup">Sign-up!</a>
     <a href="/#/products">Check out our games here.</a>
-
+    </div>
   </div>
 </template>
 
@@ -97,8 +97,10 @@
 
 <template id="logout-page">
   <div class="vue-component">
-    <h1>{{ message }}</h1>
-    <a href="/#/">Return to Home</a>
+    <div class="container">
+      <h1>{{ message }}</h1>
+        <a href="/#/">Return to Home</a>
+    </div>
   </div>
 </template>
 
@@ -136,14 +138,18 @@
 <template id="products-index-page">
    <div class="vue-component">
     <div class="container">
+
       <div class="row">     
         <div v-for="product in products" class="col-md-4">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" v-bind:src="product['image_url']" alt="">
+
+            <img class="card-img-top" v-bind:src=" product['image'] " alt="">
               <div class="card-body">
-                <h5 class="card-title">{{ product["name"] }} </h5>
-                <p class="card-text">{{ product["description"] }} </p>
-                <a v-bind:href=" 'api/products/' + product['id']" class="btn btn-primary">More Info</a>
+                <h5 class="card-title">{{ product.name }} </h5>
+                <p class="card-text">{{ product.description }} </p>
+                <p class="card-text">{{ product.formatted.price }} </p>
+  
+                <a v-bind:href=" '#/products/' + product['id']" class="btn btn-primary">More Info</a>
               </div>
             </div>
           </div>
@@ -157,9 +163,13 @@
 <template id="products-show-page">
    <div class="vue-component">
      <div class="container">
-      <div >
-        
-      </div>
+
+      <img v-bind:src=" product['image'] " alt="">
+      <h3>Name: {{ product.name }} </h3>
+      <h3>Price  {{ product.formatted.price  }} </h3>
+      <h3>Description:  {{ product.description  }} </h3>
+
+      
      </div>
    </div> 
 </template>

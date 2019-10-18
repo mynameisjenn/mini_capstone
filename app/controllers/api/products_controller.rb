@@ -1,5 +1,5 @@
 class Api::ProductsController < ApplicationController
-  before_action :authenticate_admin, only: [:create, :update, :destroy]
+  # before_action :authenticate_admin, only: [:create, :update, :destroy]
 
   def index
     @products = Product.all 
@@ -51,7 +51,6 @@ class Api::ProductsController < ApplicationController
 
 
   def update
-
     product_id = params[:id]
     @product = Product.find(product_id)
 
